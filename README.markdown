@@ -19,6 +19,6 @@ Usage
 
 Add delayed: to the start of any rake task e.g.
 
-    $ rake delayed:db:seed
+    $ rake delay:db:seed
 
 rake db:seed will now be run in the background as a delayed_job

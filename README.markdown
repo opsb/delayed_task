@@ -17,7 +17,7 @@ Install
 Usage
 -----
 
-Add delayed: to the start of any rake task e.g.
+Add delay: to the start of any rake task e.g.
 
     $ rake delay:db:seed
 

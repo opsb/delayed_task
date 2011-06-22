@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["opsb"]
   s.summary = %q{Run any rake tasks as a delayed job'}  
-  s.description = %q{Run any rake tasks as a delayed job by adding delayed: in front of the rake task e.g. rake delayed:db:seed'}
+  s.description = %q{Run any rake tasks as a delayed job by adding delay: in front of the rake task e.g. rake delay:db:seed'}
   s.email = %q{oliver@opsb.co.uk}
   s.files = Dir.glob("lib/**/*") + %w(delayed_task.gemspec)
   s.homepage = %q{http://github.com/opsb/delayed_task}

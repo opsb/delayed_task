@@ -1,6 +1,6 @@
 module DelayedTask
   class << self
-    include Rake::DSL
+    include Rake::DSL if defined?(Rake::DSL)
     def add_delayed_tasks
       Rake::Task.tasks.each do |task|
         task "delay:#{task.name}" do

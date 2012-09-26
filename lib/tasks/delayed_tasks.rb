@@ -3,11 +3,20 @@ module DelayedTask
     include Rake::DSL if defined?(Rake::DSL)
     def add_delayed_tasks
       Rake::Task.tasks.each do |task|
-        task "delay:#{task.name}", *task.arg_names do |t, args|
+        task "delay:#{task.name}", *task.arg_names << :queue do |t, args|
+          options = args.to_hash
+          queue = options.delete(:queue)
+
           Rake::Task["environment"].invoke
-          values = args.to_hash.values.empty? ? "" : "[" + args.to_hash.values.join(",") + "]"
+          values = options.values.empty? ? "" : "[" + options.values.join(",") + "]"
           invocation = task.name + values
-          Delayed::Job.enqueue DelayedTask::PerformableTask.new(invocation)
+
+          if queue
+            Delayed::Job.enqueue DelayedTask::PerformableTask.new(invocation), :queue => queue
+          else
+            Delayed::Job.enqueue DelayedTask::PerformableTask.new(invocation)
+          end
+
           puts "Enqueued job: rake #{invocation}"
         end
       end
